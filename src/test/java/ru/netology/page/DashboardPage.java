@@ -3,6 +3,7 @@ package ru.netology.page;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.alfabank.alfatest.cucumber.api.AkitaPage;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -10,7 +11,7 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class DashboardPage {
+public class DashboardPage extends AkitaPage {
     private SelenideElement heading = $("[data-test-id=dashboard]");
     private ElementsCollection cardList = $$(".list .list__item");
     private SelenideElement fieldAmount = $("[data-test-id=amount] input");
@@ -49,7 +50,7 @@ public class DashboardPage {
     }
 
     public int getBalance(String lastFourDigit) {
-        String[] cardInfo = cardList.findBy(Condition.text(lastFourDigit)).getText().split("\\ ");
+        String[] cardInfo = cardList.findBy(Condition.text(lastFourDigit)).getText().split(" ");
         return Integer.parseInt(cardInfo[5]);
     }
 
